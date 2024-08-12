@@ -4,6 +4,7 @@ class Tile {
   int w;
   boolean clicked = false;
   boolean armed = false;
+  boolean flagged = false;
   String contents = "";
 
   Tile(int x_index, int y_index, int x, int y, int w) {
@@ -62,6 +63,16 @@ class Tile {
         text(contents, x+ w / 2, y + 0.75 * w);
       }
     }
+    
+    if (flagged) {
+      pushMatrix();
+      translate(x, y);
+      fill(255, 0, 0);
+      noStroke();
+      rect(w / 4, w / 4, w / 10, w * 0.5);
+      rect(w / 4, w/4, w * 0.4, w * 0.3);
+      popMatrix();
+    }
   }
 
   void drawHover(int mx, int my) {
@@ -80,6 +91,13 @@ class Tile {
     this.clicked = b;
   }
 
+  void setFlagged(boolean b) {
+    this.flagged = b;
+  }
+  
+  boolean getFlagged() {
+    return this.flagged;
+  }
 
 
   boolean wasClicked(int x, int y) {

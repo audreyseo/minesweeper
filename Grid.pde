@@ -26,6 +26,14 @@ class Grid {
   Tile getTile(Coord c) {
     return this.g.get(c.getX()).get(c.getY());
   }
+  
+  boolean hasTile(Coord c) {
+    return hasTile(c.getX(), c.getY());
+  }
+  
+  boolean hasTile(int x, int y) {
+    return 0 <= x && x < this.g.size() && 0 <= y && y < this.g.get(x).size(); 
+  }
 
   ArrayList<Coord> getCoords(int i, int j) {
     ArrayList<Coord> coords = new ArrayList<Coord>();

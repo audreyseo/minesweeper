@@ -17,13 +17,20 @@ void draw() {
 
 
 void mouseClicked() {
-  g.addressClicks();
+  if (g.getFlagMode()) {
+    println("Flag mode");
+    g.flagTile(mouseX, mouseY);
+  } else {
+    g.addressClicks(mouseX, mouseY);
+  }
 }
 
 void keyReleased() {
   println(key);
   if (key == 'h' || key == 'H') {
-    println(g.getHover());
+    //println(g.getHover());
     g.setHover(!g.getHover());
+  } else if (key == 'x' || key == 'X') {
+    g.setFlagMode(!g.getFlagMode());
   }
 }

@@ -4,6 +4,7 @@ class Game {
   boolean hover = false;
   Grid g;
   int num;
+  boolean flagMode = false;
 
   static final int TILE_SIZE = 30;
 
@@ -49,6 +50,17 @@ class Game {
     }
   }
 
+  private Tile coordToTile(Coord c) {
+    return coordToTile(c.getX(), c.getY());
+  }
+
+  private Tile coordToTile(int x, int y) {
+    int x1 = x / TILE_SIZE;
+    int y1 = y / TILE_SIZE;
+
+    return this.g.getTile(x1, y1);
+  }
+
   void draw(int mx, int my) {
     for (Tile t : tiles) {
       t.draw();
@@ -67,12 +79,31 @@ class Game {
     return hover;
   }
 
-  void addressClicks() {
-    for (Tile t : tiles) {
-      if (t.wasClicked(mouseX, mouseY)) {
-        this.g.addressClicks(t.getCoordinate());
-        return;
-      }
+  void setFlagMode(boolean b) {
+    flagMode = b;
+  }
+
+  boolean getFlagMode() {
+    return flagMode;
+  }
+  
+  
+
+  void addressClicks(int x, int y) {
+    Tile t = coordToTile(x, y);
+    if (!t.getFlagged() && t.wasClicked(x, y)) {
+      this.g.addressClicks(t.getCoordinate());
     }
+    //for (Tile t : tiles) {
+    //  if (!t.getFlagged() && t.wasClicked(mouseX, mouseY)) {
+    //    this.g.addressClicks(t.getCoordinate());
+    //    return;
+    //  }
+    //}
+  }
+
+  void flagTile(int x, int y) {
+    Tile t = coordToTile(x, y);
+    t.setFlagged(!t.getFlagged());
   }
 }
