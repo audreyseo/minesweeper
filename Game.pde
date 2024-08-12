@@ -5,15 +5,15 @@ class Game {
   Grid g;
   int num;
 
-  static final int TILE_SIZE = 20;
+  static final int TILE_SIZE = 30;
 
   Game(int wid, int hei, int numMines) {
     this.w = wid;
     this.h = hei;
     this.num = numMines;
 
-    int tx = WIDTH / TILE_SIZE;
-    int ty = HEIGHT / TILE_SIZE;
+    int tx = wid / TILE_SIZE;
+    int ty = hei / TILE_SIZE;
     g = new Grid(tx, ty);
     for (int i = 0; i < tx; i++) {
       for (int j = 0; j < ty; j++) {
@@ -69,9 +69,7 @@ class Game {
 
   void addressClicks() {
     for (Tile t : tiles) {
-      boolean b = t.clicked;
-      t.wasClicked(mouseX, mouseY);
-      if (t.clicked != b) {
+      if (t.wasClicked(mouseX, mouseY)) {
         this.g.addressClicks(t.getCoordinate());
         return;
       }

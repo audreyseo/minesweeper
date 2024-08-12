@@ -33,9 +33,9 @@ class Tile {
     stroke(0);
     if (clicked) {
       if (isBlank()) {
-         fill(200);
+        fill(200);
       } else {
-         fill(175); 
+        fill(175);
       }
     } else {
       fill(255);
@@ -82,10 +82,12 @@ class Tile {
 
 
 
-  void wasClicked(int x, int y) {
+  boolean wasClicked(int x, int y) {
     if (inside(x, y)) {
       this.clicked = true;
+      return true;
     }
+    return false;
   }
 
   boolean inside(int x, int y) {
