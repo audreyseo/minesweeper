@@ -22,6 +22,13 @@ class Tile {
     this.contents = c;
   }
 
+  void reset() {
+    this.clicked = false;
+    this.armed = false;
+    this.flagged = false;
+    this.contents = "";
+  }
+
   boolean isBlank() {
     return this.contents.length() == 0;
   }
@@ -44,34 +51,36 @@ class Tile {
     rect(x, y, w, w);
 
     if (clicked) {
-      if (armed) {
-        fill(0);
-        textAlign(CENTER);
-        text("B", x + w / 2, y + 0.75 * w);
-      } else if (!isBlank()) {
-        int n = int(this.contents);
-        if (n == 1) {
-          fill(0, 0, 255);
-        } else if (n == 2) {
-          fill(0, 255, 0);
-        } else if (n == 3) {
-          fill(255, 0, 0);
-        } else {
-          fill(0);
-        }
-        textAlign(CENTER);
-        text(contents, x+ w / 2, y + 0.75 * w);
-      }
+      drawContents();
     }
-    
+
     if (flagged) {
       pushMatrix();
-      translate(x, y);
-      fill(255, 0, 0);
-      noStroke();
-      rect(w / 4, w / 4, w / 10, w * 0.5);
-      rect(w / 4, w/4, w * 0.4, w * 0.3);
+      translate(x + (w / 4), y + (w / 4));
+      redFlagStyle();
+      drawFlag(w);
       popMatrix();
+    }
+  }
+
+  void drawContents() {
+    if (armed) {
+      fill(0);
+      textAlign(CENTER);
+      text("B", x + w / 2, y + 0.75 * w);
+    } else if (!isBlank()) {
+      int n = int(this.contents);
+      if (n == 1) {
+        fill(0, 0, 255);
+      } else if (n == 2) {
+        fill(0, 255, 0);
+      } else if (n == 3) {
+        fill(255, 0, 0);
+      } else {
+        fill(0);
+      }
+      textAlign(CENTER);
+      text(contents, x+ w / 2, y + 0.75 * w);
     }
   }
 
@@ -94,7 +103,7 @@ class Tile {
   void setFlagged(boolean b) {
     this.flagged = b;
   }
-  
+
   boolean getFlagged() {
     return this.flagged;
   }

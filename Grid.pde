@@ -70,10 +70,20 @@ class Grid {
     return numSurrounding;
   }
 
-  void addressClicks(Coord c) {
+  boolean addressClicks(Coord c) {
+    Tile t = getTile(c);
+    if (t.isMine()) {
+      t.setClicked(true);
+      // will need to do other stuff here
+      return true;
+    }
+    // Otherwise, we continue
     addressClicks(new ArrayList<Coord>(), c.getX(), c.getY());
+    return false;
   }
-
+  
+  /** Recursively address clicks to expose clear areas
+  */
   void addressClicks(ArrayList<Coord> addressed, int x, int y) {
     Tile t = getTile(x, y);
     addressed.add(new Coord(x, y));

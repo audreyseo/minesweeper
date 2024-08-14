@@ -3,8 +3,16 @@ class Game {
   int w, h;
   boolean hover = false;
   Grid g;
+  // number of mines
   int num;
   boolean flagMode = false;
+  // number of tiles clicked
+  int numClicked = 0;
+  
+  // secret mode for testing, exposes contents on hover
+  boolean xrayMode = false;
+  
+  boolean blownUp = false;
 
   static final int TILE_SIZE = 30;
 
@@ -64,6 +72,9 @@ class Game {
   void draw(int mx, int my) {
     for (Tile t : tiles) {
       t.draw();
+      if (xrayMode && !t.clicked && t.inside(mx, my)) {
+        t.drawContents();
+      }
       if (hover) {
         t.drawHover(mx, my);
       }
@@ -87,12 +98,48 @@ class Game {
     return flagMode;
   }
   
+  void setXrayMode(boolean b) {
+    xrayMode = b;
+  }
   
+  boolean getXrayMode() {
+    return xrayMode;
+  }
+
+  void setNumberOfMines(int n) {
+    if (n > 0) {
+      this.num = n;
+    }
+  }
+
+  int getNumberOfMines() {
+    return this.num;
+  }
+
+  int getNumSwept() {
+    return this.numClicked;
+  }
+
+  int getNumFlagged() {
+    int flagged = 0;
+    for (Tile t : tiles) {
+      if (t.getFlagged()) {
+        flagged++;
+      }
+    }
+    return flagged;
+  }
+
+  boolean isDone() {
+    return this.blownUp || (this.tiles.size() == this.numClicked + this.num);
+  }
+
+
 
   void addressClicks(int x, int y) {
     Tile t = coordToTile(x, y);
     if (!t.getFlagged() && t.wasClicked(x, y)) {
-      this.g.addressClicks(t.getCoordinate());
+      this.blownUp = this.g.addressClicks(t.getCoordinate());
     }
     //for (Tile t : tiles) {
     //  if (!t.getFlagged() && t.wasClicked(mouseX, mouseY)) {
