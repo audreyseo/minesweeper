@@ -4,6 +4,10 @@ abstract class StatusBarItem {
   int yDiff = 0;
   void draw(float xspace, boolean on) {
   }
+  
+  void setYDiff(int n) {
+    yDiff = n;
+  }
 }
 
 class StatusBarInfo extends StatusBarItem {
