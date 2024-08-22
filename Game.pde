@@ -141,12 +141,6 @@ class Game {
     if (!t.getFlagged() && t.wasClicked(x, y)) {
       this.blownUp = this.g.addressClicks(t.getCoordinate());
     }
-    //for (Tile t : tiles) {
-    //  if (!t.getFlagged() && t.wasClicked(mouseX, mouseY)) {
-    //    this.g.addressClicks(t.getCoordinate());
-    //    return;
-    //  }
-    //}
   }
 
   void flagTile(int x, int y) {

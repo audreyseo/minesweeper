@@ -60,43 +60,5 @@ class StatusBar {
     
         
     popMatrix();
-    
-    ////int minesFound = g.getNumFlagged();
-
-    ////fill(0);
-
-    ////textAlign(CENTER);
-    ////text(str(minesFound) + " / " + str(totalMines), g.w / 2, g.h + 15);
-
-    //pushMatrix();
-    //translate(0, g.h + 2);
-    //items.get(0).draw(g.w * 0.5, g.getFlagMode());
-    //popMatrix();
-    
-    //pushMatrix();
-    //translate(g.w * 0.25, g.h + 15);
-    //items.get(1).draw(g.w * 0.5, true);
-    //popMatrix();
-
-    ////pushMatrix();
-    ////if (g.getFlagMode()) {
-    ////  redFlagStyle();
-    ////} else {
-    ////  flagOutlineStyle();
-    ////}
-    ////translate(g.w / 4, g.h + 2);
-    ////drawFlag(25);
-    ////popMatrix();
-
-
-    //pushMatrix();
-    //translate(g.w * 0.5, g.h + 2);
-    //items.get(2).draw(g.w * 0.5, g.getXrayMode());
-    ////if (g.getXrayMode()) {
-    ////  image(xray, 0, 0, xraySize, xraySize);
-    ////} else {
-    ////  image(xrayInv, 0, 0, xraySize, xraySize);
-    ////}
-    //popMatrix();
   }
 }
